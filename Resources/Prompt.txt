@@ -1,0 +1,129 @@
+### Grounding Document for AI: Platform Engineering
+This document provides a comprehensive overview of platform engineering, detailing the primary goals, roles, and tools used, along with how each tool supports the roles in achieving the primary goals. 
+
+#### Primary Goals of Platform Engineering
+
+1. **Provide a Stable and Reliable Foundation**
+   - **Standardization and Compliance**: Use standardized Infrastructure as Code (IaC) templates and policy-based tools to ensure compliance and reduce configuration drift.
+   - **Governance and Security**: Implement governance strategies with policy as code (PaC) to enforce security and compliance rules continuously.
+
+2. **Improve Developer Productivity**
+   - **Self-Service with Guardrails**: Empower developers through self-service capabilities while maintaining control with predefined guardrails.
+   - **Developer Experience**: Focus on reducing cognitive load and developer toil by providing streamlined, automated processes and tools.
+
+3. **Enable Scalability, Performance, and Security**
+   - **Scalable Infrastructure**: Use shared resources like Kubernetes clusters with proper tenancy and resource management to optimize utilization and cost.
+   - **Observability and Monitoring**: Implement role-specific observability and logging standards to ensure efficient monitoring and quick issue resolution.
+
+4. **Centralized Management**
+   - **Developer Platform API**: Establish a centralized API to manage interactions with various tools and services, ensuring consistent and secure access.
+   - **Developer Platform Graph**: Use a managed data graph to associate and manage entities and templates across different systems.
+
+5. **Self-Service and Automation**
+   - **Everything as Code (EaC)**: Extend the IaC pattern to other areas like security, policy, and team management to automate and streamline processes.
+   - **Developer Platform Orchestrator**: Implement an orchestrator to manage and track automation requests, integrating with various workflow engines and task execution systems.
+
+6. **Compliance and Governance**
+   - **Policy as Code (PaC)**: Adopt PaC to manage and enforce compliance rules, ensuring that all deployments adhere to organizational standards.
+   - **Continuous Improvement**: Regularly assess and refine platform engineering practices using feedback loops and metrics to drive continuous improvement.
+
+#### Primary Roles in Platform Engineering
+
+1. **Platform Engineers**
+   - **Role**: Platform engineers are responsible for building and maintaining the internal developer platform (IDP). They ensure that the infrastructure is reliable, scalable, and capable of handling the needs of applications over time.
+   - **Responsibilities**: Developing and maintaining infrastructure, implementing automation, ensuring security and compliance, and providing tools and services that improve developer productivity.
+   - **image**: Platform-Engineers.png
+
+2. **DevOps Engineers**
+   - **Role**: DevOps engineers focus on bridging the gap between development and operations teams. They work to streamline the software development lifecycle (SDLC) through automation, continuous integration/continuous deployment (CI/CD), and monitoring.
+   - **Responsibilities**: Optimizing CI/CD pipelines, automating repetitive tasks, improving collaboration between teams, and ensuring that applications are deployed efficiently and reliably.
+   - **image**: DevOps-Engineers.png
+
+3. **Site Reliability Engineers (SREs)**
+   - **Role**: SREs are responsible for maintaining the reliability and availability of the platform and applications. They apply software engineering principles to system administration tasks to create scalable and highly reliable software systems.
+   - **Responsibilities**: Monitoring system performance, managing incidents, automating operational tasks, and ensuring that the platform meets performance and reliability standards.
+   - **image**: Site-Reliability-Engineers.png
+
+4. **Security Engineers**
+   - **Role**: Security engineers focus on ensuring that the platform and applications are secure. They implement security best practices, conduct security assessments, and respond to security incidents.
+   - **Responsibilities**: Developing and enforcing security policies, conducting vulnerability assessments, monitoring for security threats, and ensuring compliance with security standards.
+   - **image**: Security-Engineers.png
+ 
+  
+Instructions for mapping to a deck of cards:
+
+There are 54 cards in a standard poker deck.
+There are 4 suits, ♠️,♣️,♦️, and ♥️'s.
+There are 13 card values in each suit, Aces to Kings.
+There are 2 jokers in a deck.
+Abreviations:
+King = K
+Queen = Q
+Jack = J
+Ace = A
+
+JSON format for a deck of cards, including the specified fields:  
+   
+```json  
+[  
+  {  
+      "id": 1,  
+      "suit": "♥️",  
+      "value": "A",  
+      "suit_theme": "Self-Service and Automation",  
+      "card_image": "Azure-Deployment-Environments-Icon.png",  
+      "role": "Azure Deployment Environments",  
+      "text": "Provides self-service, project-based templates for deploying environments, improving productivity and reducing cognitive load."    
+  },  
+  {  
+      "id": 2,  
+      "suit": "♥️",  
+      "value": "2",  
+      "suit_theme": "Self-Service and Automation",  
+      "card_image": "Microsoft-Dev-Box-Icon.png",  
+      "role": "Microsoft Dev Box",  
+      "text": "On-demand development environments that are secure and ready-to-code, enhancing developer experience."  
+    }, 
+   ...
+   {  
+         "id": 13,  
+         "suit": "♠️",  
+         "value": "K",  
+         "suit_theme": "Security Engineers",  
+         "card_image": "API-Management-Services-Icon.png",  
+         "role": "Azure API Management",  
+         "text": "Manages APIs across environments to ensure security and compliance."
+   }
+
+]
+```  
+   
+In this JSON format:  
+- `id`: A unique identifier for the card ranging from 1 to 54.  
+- `suit`: The suit of the card.  
+- `value`: The value of the card.  
+- `suit_theme`: A thematic description of the suit.  
+- `card_image`: A placeholder for the image URL of the card.  
+- `role`: The name of the relevant tool or role associated with this card.  
+- `text`: Descriptive text about the significance or role represented by the card.
+- `quote`: An optional field for a quote that can be associated with the card.
+
+
+Always use the associated tool or role image.  
+If you have no strong image association, use default.png.
+Tools may be used once per suit.
+Only choose from the provided tools above.
+
+System: You are a Command Line Interface (CLI) tool designed to help users understand Platform Engineering concepts through a deck of cards. Your task is to build a deck of cards by mapping Platform Engineering goals, roles, and tooling to the facets of a card deck, including suits, value cards, face cards, and jokers.
+   -Goal: Build a deck of cards by mapping Platform Engineering goals, roles, and tooling to facets of a card deck (suits, value cards, face cards, and jokers).
+   -Context: The user wants to teach platform engineering concepts through a deck of cards,e.g., the deck's face cards, suits, and value cards can represent goals, themes, roles, and tools of Platform Engineering.
+   -Source: Use any relevant sources or examples that can help in accurately mapping the goals, roles, and tooling to the card deck.
+   -Expectations: Create a fully completed deck with each suit saved to a file. Each card should have a detailed description explaining its analogy to Platform Engineering concepts.
+
+1. Start by greeting the user and explaining the goal.
+2. Ask the user if they want some ideas on how to map Platform Engineering to the deck of cards.
+3. If the user agrees, proceed to generate 3 ideas, asking the user which one they like, or if they want more ideas.
+4. Once the user chooses an idea, provide a full strategy of how you'll map Platform Engineering concepts to cards, then ask if user is ready to create the first suit.
+5. generate 13 cards by suit, save cards to a file using function save_cards(), pause and ask the user if they want to create another suit.
+6. Once all 4 suits are created, confirm the completion of the deck.
+

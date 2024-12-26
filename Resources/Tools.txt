@@ -1,0 +1,167 @@
+### Tools for Platform Engineering and Their Support Roles
+
+#### Platform Engineers
+1. **Azure Kubernetes Service (AKS)**
+   Managed service for deploying and managing Kubernetes clusters, ensuring scalability and reliability.
+   - **image**: AKS-Automatic-Icon.png
+
+2. **GitHub Codespaces**
+   Cloud-hosted development environments that improve productivity and collaboration.
+   - **image**: GitHub-Codespaces.png
+
+3. **Azure Developer CLI (azd)**
+   Provides integrated commands for setting up environments, managing infrastructure, and continuous delivery, ensuring standardization and compliance.
+   - **image**: Azure-Developer-CLI-Icon.png
+
+4. **Terraform on Azure**
+   Enables Infrastructure as Code (IaC) for defining and provisioning infrastructure, ensuring standardization and compliance.
+   - **image**: Template-Specs-Icon.png
+
+5. **Azure Deployment Environments**
+   Provides self-service, project-based templates for deploying environments, improving productivity and reducing cognitive load.
+   - **image**: Azure-Deployment-Environments-Icon.png
+
+6. **Microsoft Dev Box**
+   On-demand development environments that are secure and ready-to-code, enhancing developer experience.
+   - **image**: Microsoft-Dev-Box-Icon.png
+
+7. **Azure Container Registry**
+   Manages container images and artifacts in a private registry for secure and efficient container management.
+   - **image**: Container-Registries-Icon.png
+
+8. **Azure API Center**
+   Centralizes management and discovery of APIs, ensuring consistent and secure access.
+   - **image**: API-Center-Icon.png
+
+9. **Azure Managed Grafana**
+   Fully managed Grafana service for monitoring and observability, integrating with Azure Monitor and other data sources.
+   - **image**: Azure-Managed-Grafana-Icon.png
+
+10. **Azure Bastion**
+    Provides secure and seamless RDP and SSH access to your virtual machines directly through the Azure portal.
+    - **image**: Azure-Bastions-Icon.png
+
+#### DevOps Engineers
+1. **GitHub Actions**
+   Automates workflows for building, testing, and deploying code, streamlining the Software Development Life Cycle (SDLC).
+   - **image**: github.png
+
+2. **Azure Pipelines**
+   CI/CD services for building, testing, and deploying applications, ensuring efficient and reliable deployments.
+   - **image**: Azure-Devops-Icon.png
+
+3. **Azure Developer CLI (azd)**
+   Simplifies CI/CD pipeline integration by enabling automated environment setup, enhancing automation, and consistency within pipelines.
+   - **image**: Azure-Developer-CLI-Icon.png
+
+4. **Azure Load Testing**
+   Identifies performance bottlenecks by generating high-scale load, ensuring application performance.
+   - **image**: Azure-Load-Testing-Icon.png
+
+5. **Azure API Center**
+   Facilitates API integration and management within CI/CD pipelines, enhancing automation and consistency.
+   - **image**: API-Center-Icon.png
+
+6. **Azure Managed Prometheus**
+   Fully managed Prometheus service for monitoring and alerting, integrating with Azure Monitor and other data sources.
+   - **image**: prometheus-logo.png
+
+7. **Azure Application Insights**
+   Provides insights into application performance, usage patterns, and diagnostics for observability and issue resolution.
+   - **image**: Azure-Application-Insights-Icon.png
+
+#### Site Reliability Engineers (SREs)
+1. **Azure Monitor**
+   Comprehensive monitoring and observability for cloud and on-premises environments to ensure system reliability.
+   - **image**: Monitor-Health-Models-Icon.png
+
+2. **Azure Log Analytics**
+   Collects and analyzes log data to aid incident management and root cause analysis.
+   - **image**: Azure-Log-Analytics-Workspaces-Icon.png
+
+3. **Azure Automation**
+   Automates cloud management tasks, enhancing operational efficiency.
+   - **image**: Azure-Automation-Accounts-Icon.png
+
+4. **Azure Developer CLI (azd)**
+   Provides controlled mechanisms to ensure the reliability and availability of environments, enhancing operational efficiency and reliability.
+   - **image**: Azure-Developer-CLI-Icon.png
+
+5. **Azure Chaos Studio**
+   Tests application resilience through chaos engineering, ensuring reliability under stress.
+   - **image**: Azure-Chaos-Studio-Icon.png
+
+6. **Azure Application Insights**
+   Provides insights into application performance, usage patterns, and diagnostics for observability and issue resolution.
+   - **image**: Azure-Application-Insights-Icon.png
+
+7. **Azure Monitor AIOps and Machine Learning**
+   Enhances monitoring with predictive capabilities using AI and machine learning.
+   - **image**: Azure-Monitor-Dashboard-Icon.png
+
+8. **Dynamic Thresholds for Metric Alerts**
+   Automatically sets alert thresholds based on historical data to identify anomalies.
+   - **image**: Azure-Monitor-Dashboard-Icon.png
+
+9. **Azure Managed Grafana**
+   Fully managed Grafana service for monitoring and observability, integrating with Azure Monitor and other data sources.
+   - **image**: Managed-Grafana-Icon.png
+
+10. **Azure Managed Prometheus**
+    Fully managed Prometheus service for monitoring and alerting, integrating with Azure Monitor and other data sources.
+    - **image**: Managed-Prometheus-Icon.png
+
+
+#### Security Engineers
+1. **Microsoft Defender for Cloud**
+ Offers unified security management and advanced threat protection for applications and platforms.
+ - **image**: Microsoft-Defender-for-Cloud-Icon.png
+2. **Azure Policy**
+ Manages and enforces policies across Azure resources for compliance and governance.
+ - **image**: Policy-Icon.png
+3. **Azure Developer CLI (azd)**
+ Integrates security policies into deployment pipelines and automates compliance checks, ensuring secure and compliant infrastructure.
+ - **image**: Azure-Developer-CLI-Icon.png
+4. **GitHub Advanced Security**
+ Provides automated scanning and vulnerability detection to enhance application security.
+ - **image**: github.png
+5. **Azure API Management**
+ Manages APIs across environments to ensure security and compliance.
+ - **image**: API-Management-Services-Icon.png
+6. **Microsoft Cloud Security Benchmark**
+ Provides comprehensive security guidelines and best practices for securing cloud environments across Azure, AWS, and Google Cloud.
+ - **image**: Security-Baselines-Icon.png
+
+
+#### Additional Tools for ALL Roles
+1. **Visual Studio Code**
+   Versatile code editor that supports extensions and AI-powered suggestions from GitHub Copilot.
+   - **image**: vscode.png
+
+2. **Microsoft Playwright Testing**
+   Scalable end-to-end testing for web applications to ensure quality and reliability.
+   - **image**: Playwright-logo.png
+
+3. **Azure AI Foundry**
+   Unified platform for designing and managing AI solutions.
+   - **image**: AI-Studio-Icon.png
+
+4. **GitHub Codespaces**
+   Cloud-hosted development environments that improve productivity and collaboration.
+   - **image**: GitHub-Codespaces.png
+
+5. **GitHub Copilot**
+   AI-powered code suggestions to enhance coding efficiency.
+   - **image**: github.png
+
+6. **GitHub Issues**
+   Tracks tasks, bugs, and feature requests to aid project management.
+   - **image**: github.png
+
+7. **GitHub Packages**
+   Hosts and manages packages for efficient distribution.
+   - **image**: github.png
+
+8. **GitHub Discussions**
+   Facilitates community-building and problem-solving discussions.
+   - **image**: github.png
