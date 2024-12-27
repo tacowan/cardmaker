@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents.OpenAI;
 using Microsoft.SemanticKernel.ChatCompletion;
+using System.Text.RegularExpressions;
+using System.Text;
+
 
 
 namespace CardMaker;
@@ -49,6 +52,7 @@ public class Settings
 public class ContextUtils
 {
     private OpenAIAssistantAgent agent;
+    private StringBuilder sb = new StringBuilder();
     private string threadId;
 
     public ContextUtils(OpenAIAssistantAgent agent, string threadId)
@@ -66,7 +70,25 @@ public class ContextUtils
     {
         await foreach (StreamingChatMessageContent response in agent.InvokeStreamingAsync(threadId))
         {
-            Console.Write($"{response.Content}");
+     
+            string s = response.Content;
+            
+            if (s.EndsWith('\n'))
+            {
+                s = s.Remove(s.Length - 1);
+                sb.Append(s);
+                var output = Regex.Unescape(sb.ToString());
+                sb.Clear();
+                Console.WriteLine(output);
+                continue;
+            }
+            sb.Append(s);
+        }
+        if (sb.Length > 0)
+        {
+            var output = Regex.Unescape(sb.ToString());
+            Console.WriteLine(output);
+            sb.Clear();
         }
         Console.WriteLine();
     }

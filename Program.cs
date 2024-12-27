@@ -5,6 +5,9 @@ using CardMaker;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents.OpenAI;
 using Microsoft.SemanticKernel.ChatCompletion;
+using ConsoleTextFormat;
+using B = ConsoleTextFormat.Fmt.Bold;
+using F = ConsoleTextFormat.Fmt;
 
 
 // Set the console encoding to UTF-8 to support Unicode characters
@@ -15,7 +18,6 @@ string cardMaker, quotePersona, toolsList;
 cardMaker = EmbeddedResource("Prompt.txt");
 quotePersona = EmbeddedResource("Prompt2.txt");
 toolsList = EmbeddedResource("Tools.txt");
-
 
 // Load configuration from environment variables or user secrets.
 Settings settings = new();
@@ -46,8 +48,8 @@ OpenAIAssistantAgent agent =
                 {
                     Name = "Card Maker",
                     Instructions = cardMaker,
-                    Temperature = 0.5f,
-                    TopP = 0.0f
+                    Temperature = 1f,
+                    TopP = 1f
                 },
                 kernel);
 
@@ -76,7 +78,18 @@ try
             isComplete = true;
             break;
         }
-        input += "Format your response to be directly printed in a CLI console. Avoid Markdown.  Freely use emoticans or ANSI escape sequences to colorize or highlight text.";
+        input += $"""
+        Please format your response using UNICODE escape codes for terminal output. For example:
+
+        Use {B.fgWhi}{B.bgBla}Heading{Fmt.clear} for top-level headings.
+        Use {Fmt.b}SubHeading{Fmt._b} for subheadings.
+        Use - for bullet points.
+        
+        Use {Fmt.ul}Underline{Fmt._ul} for underlining.
+        Use {Fmt.b}Bold{Fmt._b} for bolding.
+        Freely use emoticans. 
+        Always respond using plain text, ANSI codes, or emoticons, no matter the context. Markdown is never allowed.       
+        """;
 
         await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.User, input));
         Console.WriteLine();
