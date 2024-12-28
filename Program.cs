@@ -1,5 +1,4 @@
 ﻿using System.ClientModel;
-using System.Reflection;
 using System.Text;
 using CardMaker;
 using Microsoft.SemanticKernel;
@@ -12,10 +11,10 @@ using Microsoft.SemanticKernel.ChatCompletion;
 Console.OutputEncoding = Encoding.UTF8;
 
 // Load embedded resources
-string cardMaker, quotePersona, toolsList;
+string cardMaker, quotePersona, toolsList, yamlPersona;
 cardMaker = ContextUtils.EmbeddedResource("Agent_Prompt.txt");
-quotePersona = ContextUtils.EmbeddedResource("Persona_Prompt.txt");
 toolsList = ContextUtils.EmbeddedResource("Tools.txt");
+yamlPersona = ContextUtils.EmbeddedResource("Persona_Prompt.yaml");
 
 // Load configuration from environment variables or user secrets.
 Settings settings = new();
@@ -36,8 +35,10 @@ builder.AddAzureOpenAIChatCompletion(
 
 
 var kernel = builder.Build();
-Tools tools = new Tools(quotePersona, toolsList, kernel);
+Tools tools = new Tools(toolsList, kernel);
 kernel.Plugins.AddFromObject(tools);
+var function = kernel.CreateFunctionFromPrompt(yamlPersona);
+kernel.Plugins.AddFromFunctions("Quote_tool", [function]);
 
 OpenAIAssistantAgent agent =
             await OpenAIAssistantAgent.CreateAsync(
@@ -47,7 +48,8 @@ OpenAIAssistantAgent agent =
                     Name = "Card Maker",
                     Instructions = cardMaker,
                     Temperature = 1f,
-                    TopP = 1f
+                    TopP = 0f
+                    
                 },
                 kernel);
 
@@ -84,8 +86,7 @@ try
         input += utils.formatPrompt();
         await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.User, input));
         await utils.streamCompletion();
-        
-    } 
+    }
 }
 finally
 {

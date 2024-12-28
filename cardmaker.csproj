@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.0" />
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.32.0" />
     <PackageReference Include="Microsoft.SemanticKernel.Agents.OpenAI" Version="1.32.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Yaml" Version="1.32.0" />
   </ItemGroup>
 
   <ItemGroup>
