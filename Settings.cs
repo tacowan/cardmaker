@@ -1,12 +1,12 @@
 using System.Reflection;
-using System.Runtime.InteropServices.Marshalling;
-using System.Text.Json.Serialization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents.OpenAI;
 using Microsoft.SemanticKernel.ChatCompletion;
 using System.Text.RegularExpressions;
 using System.Text;
+using ConsoleTextFormat;
+using B = ConsoleTextFormat.Fmt.Bold;
 
 
 
@@ -61,6 +61,33 @@ public class ContextUtils
         this.threadId = threadId;
     }
 
+    public string formatPrompt()
+    {
+        return $"""
+        Please format your response using UNICODE escape codes for terminal output. For example:
+
+        Use {B.fgWhi}{B.bgBla}Heading{Fmt.clear} for top-level headings.
+        Use {Fmt.b}SubHeading{Fmt._b} for subheadings.
+        Use - for bullet points.
+        
+        Use {Fmt.ul}Underline{Fmt._ul} for underlining.
+        Use {Fmt.b}Bold{Fmt._b} for bolding.
+        Freely use emoticans. 
+        Always respond using plain text, no matter the context. Markdown is never allowed.       
+        """;
+    }
+
+    public static string EmbeddedResource(string filename)
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        using (var stream = assembly.GetManifestResourceStream($"cardmaker.Resources.{filename}"))
+        using (var reader = new StreamReader(stream))
+        {
+            return reader.ReadToEnd();
+        }
+    }
+
+
     public async void backchannel(string input)
     {
         agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.System, input));
@@ -70,9 +97,9 @@ public class ContextUtils
     {
         await foreach (StreamingChatMessageContent response in agent.InvokeStreamingAsync(threadId))
         {
-     
+
             string s = response.Content;
-            
+
             if (s.EndsWith('\n'))
             {
                 s = s.Remove(s.Length - 1);
