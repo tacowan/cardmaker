@@ -93,30 +93,20 @@ public class ContextUtils
         agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.System, input));
     }
 
+
     public async Task streamCompletion()
     {
         await foreach (StreamingChatMessageContent response in agent.InvokeStreamingAsync(threadId))
         {
-
-            string s = response.Content;
-
-            if (s.EndsWith('\n'))
-            {
-                s = s.Remove(s.Length - 1);
-                sb.Append(s);
-                var output = Regex.Unescape(sb.ToString());
-                sb.Clear();
-                Console.WriteLine(output);
-                continue;
-            }
-            sb.Append(s);
-        }
-        if (sb.Length > 0)
-        {
-            var output = Regex.Unescape(sb.ToString());
-            Console.WriteLine(output);
-            sb.Clear();
+             foreach ( char c in response.Content)  {
+                if (c != '\\')
+                    Console.Write(c);
+             }
+             
         }
         Console.WriteLine();
+        Console.Write("\n> ");
+
     }
+
 }

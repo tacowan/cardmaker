@@ -71,9 +71,9 @@ try
     string input;
     while ((input = Console.ReadLine()) is not null)
     {
-        Console.Write("\n> ");
         if (string.IsNullOrWhiteSpace(input))
         {
+            Console.Write(">");
             continue;
         }
         if (input.Trim().Equals("EXIT", StringComparison.OrdinalIgnoreCase))
@@ -84,7 +84,7 @@ try
         input += utils.formatPrompt();
         await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.User, input));
         await utils.streamCompletion();
-        Console.WriteLine();
+        
     } 
 }
 finally
