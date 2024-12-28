@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 
 namespace CardMaker;
@@ -20,20 +20,17 @@ public class Tools
 
 
     [KernelFunction("random_quote")]
-    [Description("retrieve a random quoteyes.")]
+    [Description("retrieve a random quote.")]
     [return: Description("a random quote for a card.")]
     public async Task<string> random_quote(int card_number, string suit_theme, string role, string text)
     {
-        var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-        ChatHistory history = [];    
-        history.AddSystemMessage(prompt);
-        history.AddUserMessage($"Significance of {role}: {text}, share a quote of 3 sentences or less on how {role} achives the goals of {suit_theme}.");
-
-        var response = await chatCompletionService.GetChatMessageContentAsync(
-            history,
-            kernel: kernel
-        );
-        return response.ToString();
+        var executionSettings = new OpenAIPromptExecutionSettings {
+            Temperature = 1f, // warm it up!
+            TopP = 1f,
+         };
+        var f = kernel.CreateFunctionFromPrompt(prompt, executionSettings);
+        var result = await f.InvokeAsync(kernel);
+        return result.ToString();
     }
 
 
