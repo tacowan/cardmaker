@@ -15,8 +15,8 @@ Console.OutputEncoding = Encoding.UTF8;
 
 // Load embedded resources
 string cardMaker, quotePersona, toolsList;
-cardMaker = EmbeddedResource("Prompt.txt");
-quotePersona = EmbeddedResource("Prompt2.txt");
+cardMaker = EmbeddedResource("Agent_Prompt.txt");
+quotePersona = EmbeddedResource("Persona_Prompt.txt");
 toolsList = EmbeddedResource("Tools.txt");
 
 // Load configuration from environment variables or user secrets.
@@ -61,10 +61,12 @@ try
     
     bool isComplete = false;
     utils.backchannel(toolsList);
+    Console.Clear();
     await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.User, "Hello!"));
+    await utils.streamCompletion();
     do
     {
-        await utils.streamCompletion();
+        
         Console.Write("\n> ");
 
         // read the input, if it's good, send it to the agent
@@ -78,6 +80,7 @@ try
             isComplete = true;
             break;
         }
+        
         input += $"""
         Please format your response using UNICODE escape codes for terminal output. For example:
 
@@ -88,10 +91,11 @@ try
         Use {Fmt.ul}Underline{Fmt._ul} for underlining.
         Use {Fmt.b}Bold{Fmt._b} for bolding.
         Freely use emoticans. 
-        Always respond using plain text, ANSI codes, or emoticons, no matter the context. Markdown is never allowed.       
+        Always respond using plain text, no matter the context. Markdown is never allowed.       
         """;
 
         await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.User, input));
+        await utils.streamCompletion();
         Console.WriteLine();
 
 
