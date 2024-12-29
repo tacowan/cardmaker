@@ -67,7 +67,10 @@ public class ContextUtils
         Please format your response using UNICODE escape codes for terminal output. For example:
 
         Use {B.fgWhi}{B.bgBla}Heading{Fmt.clear} for top-level headings.
-        Use {Fmt.b}SubHeading{Fmt._b} for subheadings.
+
+        Use {Fmt.b}text{Fmt._b} for sub-headings.
+            e.g. for sub-heading sedan under heading cars, {Fmt.b}Sedan{Fmt._b}  
+        
         Use - for bullet points.
         
         Use {Fmt.ul}Underline{Fmt._ul} for underlining.
@@ -88,12 +91,17 @@ public class ContextUtils
     }
 
 
-    public async void backchannel(string input)
+    public async Task backchannel(string input)
     {
-        agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.System, input));
+        await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.System, input+formatPrompt()));
+  
     }
 
-
+    public async Task AddChatMessageAsync(string input)
+    {
+        await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.User, input+formatPrompt()));
+        await streamCompletion();
+    }
     public async Task streamCompletion()
     {
         await foreach (StreamingChatMessageContent response in agent.InvokeStreamingAsync(threadId))
