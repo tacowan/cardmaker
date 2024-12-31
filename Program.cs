@@ -3,7 +3,7 @@ using System.Text;
 using CardMaker;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents.OpenAI;
-using Microsoft.SemanticKernel.ChatCompletion;
+
 
 // Set the console encoding to UTF-8 to support Unicode characters
 Console.OutputEncoding = Encoding.UTF8;
@@ -34,6 +34,7 @@ builder.AddAzureOpenAIChatCompletion(
 var kernel = builder.Build();
 Tools tools = new Tools(toolsList, kernel);
 kernel.Plugins.AddFromObject(tools);
+
 var function = kernel.CreateFunctionFromPrompt(yamlPersona);
 kernel.Plugins.AddFromFunctions("Quote_tool", [function]);
 
@@ -58,6 +59,7 @@ if (!Console.IsOutputRedirected)
 }
 try
 {
+    // provide additional grounding before starting the conversation
     await utils.backchannel(toolsList);
     await utils.AddChatMessageAsync("Hello! What are you good at and why are we here?");
     string input;

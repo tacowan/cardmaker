@@ -93,7 +93,7 @@ public class ContextUtils
 
     public async Task backchannel(string input)
     {
-        await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.System, input+formatPrompt()));
+        await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.System, input));
   
     }
 
