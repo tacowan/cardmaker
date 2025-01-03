@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents.OpenAI;
 using Microsoft.SemanticKernel.ChatCompletion;
-using System.Text.RegularExpressions;
 using System.Text;
 using ConsoleTextFormat;
 using B = ConsoleTextFormat.Fmt.Bold;
@@ -90,7 +89,6 @@ public class ContextUtils
         }
     }
 
-
     public async Task backchannel(string input)
     {
         await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.System, input));
@@ -109,8 +107,7 @@ public class ContextUtils
              foreach ( char c in response.Content)  {
                 if (c != '\\')
                     Console.Write(c);
-             }
-             
+             }       
         }
         Console.WriteLine();
         Console.Write("\n> ");

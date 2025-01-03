@@ -35,7 +35,7 @@ var kernel = builder.Build();
 Tools tools = new();
 kernel.Plugins.AddFromObject(tools);
 
-var function = kernel.CreateFunctionFromPrompt(yamlPersona);
+var function = kernel.CreateFunctionFromPromptYaml(yamlPersona);
 kernel.Plugins.AddFromFunctions("Quote_tool", [function]);
 
 OpenAIAssistantAgent agent =
