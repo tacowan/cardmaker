@@ -32,7 +32,7 @@ builder.AddAzureOpenAIChatCompletion(
    );
 
 var kernel = builder.Build();
-Tools tools = new Tools(toolsList, kernel);
+Tools tools = new();
 kernel.Plugins.AddFromObject(tools);
 
 var function = kernel.CreateFunctionFromPrompt(yamlPersona);

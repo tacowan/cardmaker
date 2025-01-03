@@ -6,14 +6,8 @@ using TextCopy;
 namespace CardMaker;
 
 public class Tools
-{
-    private readonly Kernel kernel;
+{ 
  
-    public Tools(string toolsList, Kernel kernel)
-    {
-        this.kernel = kernel;
-    }
-
     [KernelFunction("save_cards")]
     [Description("Save the card suit to a local file.")]
     [return: Description("The full card suit in JSON format.")]
