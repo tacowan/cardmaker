@@ -5,6 +5,7 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents.OpenAI;
 
 
+
 // Set the console encoding to UTF-8 to support Unicode characters
 Console.OutputEncoding = Encoding.UTF8;
 
@@ -23,6 +24,7 @@ OpenAIClientProvider clientProvider =
         new Uri(settings.AzureOpenAI.Endpoint));
 
 var builder = Kernel.CreateBuilder();
+//builder.Services.AddSingleton(ContextUtils.getLoggerFactory());
 
 builder.AddAzureOpenAIChatCompletion(
     deploymentName: settings.AzureOpenAI.ChatModelDeployment,
@@ -31,12 +33,13 @@ builder.AddAzureOpenAIChatCompletion(
     modelId: "gpt-4o" // Optional name of the underlying model if the deployment name doesn't match the model name
    );
 
+
 var kernel = builder.Build();
 Tools tools = new();
 kernel.Plugins.AddFromObject(tools);
 
 var function = kernel.CreateFunctionFromPromptYaml(yamlPersona);
-kernel.Plugins.AddFromFunctions("Quote_tool", [function]);
+kernel.Plugins.AddFromFunctions("quote_tool", [function]);
 
 OpenAIAssistantAgent agent =
             await OpenAIAssistantAgent.CreateAsync(

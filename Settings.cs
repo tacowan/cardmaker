@@ -6,6 +6,12 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using System.Text;
 using ConsoleTextFormat;
 using B = ConsoleTextFormat.Fmt.Bold;
+using Microsoft.Extensions.Logging;
+using OpenTelemetry;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 
 
@@ -89,25 +95,57 @@ public class ContextUtils
         }
     }
 
+    public static ILoggerFactory getLoggerFactory()
+    {
+        var resourceBuilder = ResourceBuilder
+    .CreateDefault()
+    .AddService("TelemetryConsoleQuickstart");
+
+        // Enable model diagnostics with sensitive data.
+        AppContext.SetSwitch("Microsoft.SemanticKernel.Experimental.GenAI.EnableOTelDiagnosticsSensitive", true);
+
+        var traceProvider = Sdk.CreateTracerProviderBuilder()
+            .SetResourceBuilder(resourceBuilder)
+            .AddSource("Microsoft.SemanticKernel*")
+            .AddConsoleExporter()
+            .Build();
+
+        var loggerFactory = LoggerFactory.Create(builder =>
+        {
+            // Add OpenTelemetry as a logging provider
+            builder.AddOpenTelemetry(options =>
+            {
+                options.SetResourceBuilder(resourceBuilder);
+                options.AddConsoleExporter();
+                // Format log messages. This is default to false.
+                options.IncludeFormattedMessage = true;
+                options.IncludeScopes = true;
+            });
+            builder.SetMinimumLevel(LogLevel.Error);
+        });
+        return loggerFactory;
+    }
+
     public async Task backchannel(string input)
     {
-        await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.System, input));
-  
+        await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.Assistant, input));
+
     }
 
     public async Task AddChatMessageAsync(string input)
     {
-        await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.User, input+formatPrompt()));
+        await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.User, input + formatPrompt()));
         await streamCompletion();
     }
     public async Task streamCompletion()
     {
         await foreach (StreamingChatMessageContent response in agent.InvokeStreamingAsync(threadId))
         {
-             foreach ( char c in response.Content)  {
+            foreach (char c in response.Content)
+            {
                 if (c != '\\')
                     Console.Write(c);
-             }       
+            }
         }
         Console.WriteLine();
         Console.Write("\n> ");
