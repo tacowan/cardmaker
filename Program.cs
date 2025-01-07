@@ -1,6 +1,7 @@
 ﻿using System.ClientModel;
 using System.Text;
 using CardMaker;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents.OpenAI;
 
@@ -24,7 +25,7 @@ OpenAIClientProvider clientProvider =
         new Uri(settings.AzureOpenAI.Endpoint));
 
 var builder = Kernel.CreateBuilder();
-//builder.Services.AddSingleton(ContextUtils.getLoggerFactory());
+builder.Services.AddSingleton(ContextUtils.getLoggerFactory());
 
 builder.AddAzureOpenAIChatCompletion(
     deploymentName: settings.AzureOpenAI.ChatModelDeployment,

@@ -121,7 +121,7 @@ public class ContextUtils
                 options.IncludeFormattedMessage = true;
                 options.IncludeScopes = true;
             });
-            builder.SetMinimumLevel(LogLevel.Error);
+            builder.SetMinimumLevel(LogLevel.None);
         });
         return loggerFactory;
     }
