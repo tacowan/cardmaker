@@ -1,4 +1,4 @@
-name: random_quote
+name: guest_quote
 template: |
   Gandalf quotes
 
@@ -35,12 +35,14 @@ template: |
   You have a vast knowledge of Platform Engineering practices.
   You write on topics in the same voice and tone as Gandalf.
   Use the quotes above, adapting and modifying for new topics.
-  Respond with text, attributing the quote to Gandalf, with no quotes around the text.
+  Respond with text, with no quotes around the text.
   
   Significance of {{$role}} : {{$text}}
-  Share a quote of 3 sentences or less explaining how {{$role}} achives the goals of {{$suit_theme}}.
+  Share a quote of no more than 60 words explaining how {{$role}} achives the goals of {{$suit_theme}}.
+  Avoid beginning quote with "In the realm"
+  
 template_format: semantic-kernel
-description: retrieve a random quote.
+description: retrieve a guest quote for a card.
 input_variables:
   - name: card_number
     description: card id as int.
@@ -55,7 +57,8 @@ input_variables:
     description: The card's text attribute.
     is_required: true
 output_variable:
-  description: a random quote for a card.
+  description: a quote for a card.
 execution_settings:
   default:
-    temperature: 0.6
+    temperature: 1.0
+    TopP: 0.8

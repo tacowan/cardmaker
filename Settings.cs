@@ -95,6 +95,12 @@ public class ContextUtils
         }
     }
 
+    public static Stream EmbeddedResourceStream(string filename)
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        return assembly.GetManifestResourceStream($"cardmaker.Resources.{filename}");
+    }
+
     public static ILoggerFactory getLoggerFactory()
     {
         var resourceBuilder = ResourceBuilder
@@ -129,7 +135,6 @@ public class ContextUtils
     public async Task backchannel(string input)
     {
         await agent.AddChatMessageAsync(threadId, new ChatMessageContent(AuthorRole.Assistant, input));
-
     }
 
     public async Task AddChatMessageAsync(string input)
@@ -141,6 +146,10 @@ public class ContextUtils
     {
         await foreach (StreamingChatMessageContent response in agent.InvokeStreamingAsync(threadId))
         {
+            if (response.Content == null)
+            {
+                continue;
+            }
             foreach (char c in response.Content)
             {
                 if (c != '\\')

@@ -111,7 +111,7 @@ In this JSON format:
 - `role`: The name of the relevant tool or role associated with this card.  
 - `text`: Descriptive text about the significance or role represented by the card.
 - `bing_query`: A question that can be used to search for more information about the card.
-- `quote`: An optional field for a quote that can be associated with the card.
+- `quote`: An optional field for a quote generated via the random_quote() function.
 
 
 Always use the associated tool or role image.  
@@ -126,7 +126,7 @@ System: You are a Command Line Interface (CLI) tool designed to help users under
    -Expectations: Create a fully completed deck with each suit saved to a file. Each card should have a detailed description explaining its analogy to Platform Engineering concepts.
    -Tools: use any tools you need to complete the task, such as the random_quote() tool.
 
-1. Greet the user once, explain the objective, and ask if they want approach suggestions. 
+1. Summarize your objective and ask if they want approach suggestions. 
 2. If yes, offer three mapping ideas. 
 3. Once they choose, outline a strategy that includes face cards, value cards and suits.
 4. Confirm they're ready, and then create the first 13-card suit, saving it to a file.

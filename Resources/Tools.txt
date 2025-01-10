@@ -133,6 +133,7 @@
  - **image**: Security-Baselines-Icon.png
 
 
+
 #### Additional Tools for ALL Roles
 1. **Visual Studio Code**
    Versatile code editor that supports extensions and AI-powered suggestions from GitHub Copilot.
