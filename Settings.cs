@@ -80,8 +80,9 @@ public class ContextUtils
         
         Use {Fmt.ul}Underline{Fmt._ul} for underlining.
         Use {Fmt.b}Bold{Fmt._b} for bolding.
-        Freely use emoticans. 
-        Always respond using plain text, no matter the context. Markdown is never allowed.       
+        
+        Always respond using plain text, no matter the context. Markdown is never allowed.
+        Freely use emoticans.     
         """;
     }
 
